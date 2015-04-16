@@ -37,3 +37,8 @@ Bundle 'AutoClose'
 Bundle 'honza/vim-snippets' 
 "快速跳转/查找字符插件           
 Bundle 'Lokaltog/vim-easymotion'    
+
+" NERDTree config
+map <F3> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif"
+autocmd vimenter * NERDTree
