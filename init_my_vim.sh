@@ -15,4 +15,6 @@ ln -s ~/.vim/vimrc ~/.vimrc
 git submodule init
 git submodule update
 
-vi +BundleInstall! +qall
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+vim +BundleInstall  +qall
