@@ -15,6 +15,10 @@ ln -s ~/.vim/vimrc ~/.vimrc
 git submodule init
 git submodule update
 
+echo "Install vundle"
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+echo "Install jedi of python"
+easy_install jedi
 
 vim +BundleInstall  +qall
