@@ -10,7 +10,15 @@ filetype on
 " 根据侦测到的不同类型加载对应的插件
 filetype plugin on
 " 自适应不同语言的智能缩进
-"filetype indent on
+filetype indent on
+" 将制表符扩展为空格
+set expandtab
+" 设置编辑时制表符占用空格数
+set tabstop=4
+" 设置格式化时制表符占用空格数
+set shiftwidth=4
+" 让 vim 把连续数量的空格视为一个制表符
+set softtabstop=4
 "显示当前的行号列号：
 set ruler
 "在状态栏显示正在输入的命令
@@ -19,13 +27,6 @@ set showcmd
 set number
 " 高亮显示当前行/列
 set cursorline
-"定义快速跳屏:
-nmap <leader>h <C-w>h
-nmap <leader>j <C-w>j
-nmap <leader>k <C-w>k
-nmap <leader>l <C-w>l
-"为方便复制，用<F2>开启/关闭行号显示:
-nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 set modeline
 "开启实时搜索功能
 set incsearch
@@ -37,20 +38,18 @@ set nocompatible
 set wildmenu
 " 高亮显示搜索结果
 set hlsearch
-" 将制表符扩展为空格
-set expandtab
-" 设置编辑时制表符占用空格数
-set tabstop=4
-" 设置格式化时制表符占用空格数
-set shiftwidth=4
-" 让 vim 把连续数量的空格视为一个制表符
-set softtabstop=4
-
 " 基于缩进或语法进行代码折叠
 set foldmethod=indent
 "set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable"
+"定义快速跳屏:
+nmap <leader>h <C-w>h
+nmap <leader>j <C-w>j
+nmap <leader>k <C-w>k
+nmap <leader>l <C-w>l
+"为方便复制，用<F2>开启/关闭行号显示:
+nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 set rtp+=~/.vim/bundle/vundle/ 
 call vundle#rc()
