@@ -18,7 +18,8 @@ git submodule update
 echo "Install vundle"
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
-echo "Install jedi of python"
+echo "Install jedi and flake of python"
 easy_install jedi
+easy_install flake8
 
 vim +BundleInstall  +qall

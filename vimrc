@@ -19,6 +19,11 @@ set showcmd
 set number
 " 高亮显示当前行/列
 set cursorline
+"定义快速跳屏:
+nmap <leader>h <C-w>h
+nmap <leader>j <C-w>j
+nmap <leader>k <C-w>k
+nmap <leader>l <C-w>l
 "为方便复制，用<F2>开启/关闭行号显示:
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 set modeline
@@ -54,15 +59,12 @@ call vundle#rc()
 Bundle 'gmarik/vundle' 
 "目录树显示插件
 Bundle 'The-NERD-tree'   
-Bundle 'jistr/vim-nerdtree-tabs'
 "快速注释插件             
 Bundle 'The-NERD-Commenter'    
 "文件查找插件    
 Bundle 'ctrlp.vim'          
 "自动添加匹配的右括号 
 Bundle 'AutoClose'      
-"目前最好用的自动补全插件              
-"Bundle 'Valloric/YouCompleteMe'
 "代码片段自动生成插件     
 Bundle 'honza/vim-snippets' 
 "快速跳转/查找字符插件           
@@ -71,13 +73,17 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'taglist.vim'
 "jedi python 自动不全，python 必须安装 jedi模块
 Bundle 'davidhalter/jedi-vim'
+"Supertab"
+Bundle 'ervandew/supertab'
+"code check, conbine flake with pep8
+Bundle 'nvie/vim-flake8'
+"buffer
+Bundle 'fholgado/minibufexpl.vim'
 
 "-----------------  Bundle plugin configuration -----------------------
 " NERDTree config
-""map <F3> :NERDTreeToggle<CR>
-map <F3> :NERDTreeTabsToggle<CR>
+map <F3> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif"
-"autocmd bufenter * if (winnr("$") == 2 && exists("b:NERDTreeType") | q | endif"
 autocmd vimenter * NERDTree
 " 将 NERDTree 的窗口设置在 vim 窗口的右侧（默认为左侧）"
 "let NERDTreeWinPos="right"
@@ -120,4 +126,8 @@ fun! NoExcitingBuffersLeft()
 endfun
 autocmd BufWinLeave * call NoExcitingBuffersLeft()
 
+"configure jedi default using with supertab
+let g:SuperTabDefaultCompletionType = "context"
 
+"buffer configure
+let g:miniBufExplMapCTabSwitchBufs = 1
