@@ -43,6 +43,8 @@ set foldmethod=indent
 "set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable"
+"show mode
+set showmode
 "定义快速跳屏:
 nmap <leader>h <C-w>h
 nmap <leader>j <C-w>j
@@ -50,6 +52,13 @@ nmap <leader>k <C-w>k
 nmap <leader>l <C-w>l
 "为方便复制，用<F2>开启/关闭行号显示:
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+"press F3 to toggle paste modle 
+nnoremap <F3> :set invpaste paste?<CR>
+set pastetoggle=<F3>
+
+"press <F9> to execute the current buffer with python
+autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
 
 set rtp+=~/.vim/bundle/vundle/ 
 call vundle#rc()
@@ -81,7 +90,7 @@ Bundle 'fholgado/minibufexpl.vim'
 
 "-----------------  Bundle plugin configuration -----------------------
 " NERDTree config
-map <F3> :NERDTreeToggle<CR>
+map <F4> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif"
 autocmd vimenter * NERDTree
 " 将 NERDTree 的窗口设置在 vim 窗口的右侧（默认为左侧）"
@@ -91,15 +100,15 @@ autocmd VimEnter * wincmd p
 " 当打开 NERDTree 窗口时，自动显示 Bookmarks
 let NERDTreeShowBookmarks=1
 " Mirror tree position for every buffer
-autocmd BufEnter * NERDTreeMirror
+"autocmd BufEnter * NERDTreeMirror
 " Set current dir to vim cwd
 set autochdir
 let NERDTreeChDirMode=2
 let g:nerdtree_tabs_open_on_console_startup=1
 
 "taglist configuration"
-nnoremap <silent> <F4> :TlistToggle<CR> 
-autocmd vimenter * TlistToggle
+nnoremap <silent> <F5> :TlistToggle<CR> 
+"autocmd vimenter * TlistToggle
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Show_One_File = 1  
@@ -108,22 +117,22 @@ let Tlist_Exit_OnlyWindow = 1
 "在右侧窗口中显示taglist窗口          
 let Tlist_Use_Right_Window = 1 
 
-" If only 2 windows left, NERDTree and Tag_List, close vim or current tab
-fun! NoExcitingBuffersLeft()
-    if winnr("$") == 3
-    let w1 = bufname(winbufnr(1))
-    let w2 = bufname(winbufnr(2))
-    let w3 = bufname(winbufnr(3))
-    if (exists(":NERDTree")) && (w1 == "__Tag_List__" || w2 == "__Tag_List__" || w3 == "__Tag_List__")
-      if tabpagenr("$") == 1
-        exec 'qa'
-      else
-        exec 'tabclose'
-      endif
-    endif
-  endif
-endfun
-autocmd BufWinLeave * call NoExcitingBuffersLeft()
+"" If only 2 windows left, NERDTree and Tag_List, close vim or current tab
+"fun! NoExcitingBuffersLeft()
+"    if winnr("$") == 3
+"    let w1 = bufname(winbufnr(1))
+"    let w2 = bufname(winbufnr(2))
+"    let w3 = bufname(winbufnr(3))
+"    if (exists(":NERDTree")) && (w1 == "__Tag_List__" || w2 == "__Tag_List__" || w3 == "__Tag_List__")
+"      if tabpagenr("$") == 1
+"        exec 'qa'
+"      else
+"        exec 'tabclose'
+"      endif
+"    endif
+"  endif
+"endfun
+"autocmd BufWinLeave * call NoExcitingBuffersLeft()
 
 "configure jedi default using with supertab
 let g:SuperTabDefaultCompletionType = "context"
