@@ -56,8 +56,8 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
 
-"press <F9> to execute the current buffer with python
-autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+"press <F8> to execute the current buffer with python
+autocmd FileType python nnoremap <buffer> <F8> :exec '!python' shellescape(@%, 1)<cr>
 
 
 set rtp+=~/.vim/bundle/vundle/ 
@@ -90,7 +90,7 @@ Bundle 'fholgado/minibufexpl.vim'
 
 "-----------------  Bundle plugin configuration -----------------------
 " NERDTree config
-map <F4> :NERDTreeToggle<CR>
+map <F5> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif"
 autocmd vimenter * NERDTree
 " 将 NERDTree 的窗口设置在 vim 窗口的右侧（默认为左侧）"
@@ -107,7 +107,7 @@ let NERDTreeChDirMode=2
 let g:nerdtree_tabs_open_on_console_startup=1
 
 "taglist configuration"
-nnoremap <silent> <F5> :TlistToggle<CR> 
+nnoremap <silent> <F6> :TlistToggle<CR> 
 "autocmd vimenter * TlistToggle
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 "不同时显示多个文件的tag，只显示当前文件的
