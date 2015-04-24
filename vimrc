@@ -108,7 +108,7 @@ let g:nerdtree_tabs_open_on_console_startup=1
 
 "taglist configuration"
 nnoremap <silent> <F6> :TlistToggle<CR> 
-"autocmd vimenter * TlistToggle
+autocmd vimenter * TlistToggle
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Show_One_File = 1  
@@ -117,25 +117,29 @@ let Tlist_Exit_OnlyWindow = 1
 "在右侧窗口中显示taglist窗口          
 let Tlist_Use_Right_Window = 1 
 
-"" If only 2 windows left, NERDTree and Tag_List, close vim or current tab
-"fun! NoExcitingBuffersLeft()
-"    if winnr("$") == 3
-"    let w1 = bufname(winbufnr(1))
-"    let w2 = bufname(winbufnr(2))
-"    let w3 = bufname(winbufnr(3))
-"    if (exists(":NERDTree")) && (w1 == "__Tag_List__" || w2 == "__Tag_List__" || w3 == "__Tag_List__")
-"      if tabpagenr("$") == 1
-"        exec 'qa'
-"      else
-"        exec 'tabclose'
-"      endif
-"    endif
-"  endif
-"endfun
-"autocmd BufWinLeave * call NoExcitingBuffersLeft()
+" If only 2 windows left, NERDTree and Tag_List, close vim or current tab
+fun! NoExcitingBuffersLeft()
+    if winnr("$") == 3
+    let w1 = bufname(winbufnr(1))
+    let w2 = bufname(winbufnr(2))
+    let w3 = bufname(winbufnr(3))
+    if (exists(":NERDTree")) && (w1 == "__Tag_List__" || w2 == "__Tag_List__" || w3 == "__Tag_List__")
+      if tabpagenr("$") == 1
+        exec 'qa'
+      else
+        exec 'tabclose'
+      endif
+    endif
+  endif
+endfun
+autocmd BufWinLeave * call NoExcitingBuffersLeft()
 
 "configure jedi default using with supertab
 let g:SuperTabDefaultCompletionType = "context"
 
-"buffer configure
+"MiniBufExplorer configure
 let g:miniBufExplMapCTabSwitchBufs = 1
+nmap <leader>p :bn<cr>
+nmap <leader>P :bp<cr>
+nmap <leader>q :MBEbd<cr>
+nmap <leader>qa :bd <C-a><cr>
