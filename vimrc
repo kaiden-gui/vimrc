@@ -134,7 +134,8 @@ fun! NoExcitingBuffersLeft()
 endfun
 autocmd BufWinLeave * call NoExcitingBuffersLeft()
 
-"configure jedi default using with supertab
+"Notice: jedi <leader>g go to definition and <ctrl-o> to back
+"configure jedi default using with supertab. 
 let g:SuperTabDefaultCompletionType = "context"
 
 "MiniBufExplorer configure
