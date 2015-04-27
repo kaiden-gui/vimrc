@@ -66,11 +66,13 @@ call vundle#rc()
 "----------------   Bundle plugin        --------------------------
 Bundle 'gmarik/vundle' 
 "目录树显示插件
-Bundle 'The-NERD-tree'   
+Bundle 'scrooloose/nerdtree'   
 "快速注释插件             
-Bundle 'The-NERD-Commenter'    
+Bundle 'scrooloose/nerdcommenter'    
+"code check
+Bundle 'scrooloose/syntastic'
 "文件查找插件    
-Bundle 'ctrlp.vim'          
+Bundle 'kien/ctrlp.vim'
 "自动添加匹配的右括号 
 Bundle 'AutoClose'      
 "代码片段自动生成插件     
@@ -83,24 +85,16 @@ Bundle 'taglist.vim'
 Bundle 'davidhalter/jedi-vim'
 "Supertab"
 Bundle 'ervandew/supertab'
-"code check, conbine flake with pep8
-Bundle 'nvie/vim-flake8'
 "buffer
 Bundle 'fholgado/minibufexpl.vim'
 
 "-----------------  Bundle plugin configuration -----------------------
-" NERDTree config
+" NERDTree settings
 map <F5> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif"
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif"
 autocmd vimenter * NERDTree
-" 将 NERDTree 的窗口设置在 vim 窗口的右侧（默认为左侧）"
-"let NERDTreeWinPos="right"
-"设置光标在启动时在文件里
-autocmd VimEnter * wincmd p
 " 当打开 NERDTree 窗口时，自动显示 Bookmarks
 let NERDTreeShowBookmarks=1
-" Mirror tree position for every buffer
-"autocmd BufEnter * NERDTreeMirror
 " Set current dir to vim cwd
 set autochdir
 let NERDTreeChDirMode=2
@@ -117,26 +111,10 @@ let Tlist_Exit_OnlyWindow = 1
 "在右侧窗口中显示taglist窗口          
 let Tlist_Use_Right_Window = 1 
 
-" If only 2 windows left, NERDTree and Tag_List, close vim or current tab
-fun! NoExcitingBuffersLeft()
-    if winnr("$") == 3
-    let w1 = bufname(winbufnr(1))
-    let w2 = bufname(winbufnr(2))
-    let w3 = bufname(winbufnr(3))
-    if (exists(":NERDTree")) && (w1 == "__Tag_List__" || w2 == "__Tag_List__" || w3 == "__Tag_List__")
-      if tabpagenr("$") == 1
-        exec 'qa'
-      else
-        exec 'tabclose'
-      endif
-    endif
-  endif
-endfun
-autocmd BufWinLeave * call NoExcitingBuffersLeft()
-
 "Notice: jedi <leader>g go to definition and <ctrl-o> to back
 "configure jedi default using with supertab. 
 let g:SuperTabDefaultCompletionType = "context"
+let g:jedi#use_tabs_not_buffers = 0
 
 "MiniBufExplorer configure
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -144,3 +122,15 @@ nmap <leader>p :bn<cr>
 nmap <leader>P :bp<cr>
 nmap <leader>q :MBEbd<cr>
 nmap <leader>qa :bd <C-a><cr>
+nmap :q :qa
+nmap :q! :qa!
+nmap :wq :wqa
+
+"syntastic recommend settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
