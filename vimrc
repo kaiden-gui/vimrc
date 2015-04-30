@@ -41,8 +41,9 @@ set hlsearch
 " 基于缩进或语法进行代码折叠
 set foldmethod=indent
 "set foldmethod=syntax
-" 启动 vim 时关闭折叠代码
-set nofoldenable"
+" save and restore folds when a file is closed and re-opened
+au BufWinLeave ?* mkview
+au BufWinEnter ?* silent loadview
 "show mode
 set showmode
 "定义快速跳屏:
@@ -70,7 +71,7 @@ Bundle 'scrooloose/nerdtree'
 "快速注释插件             
 Bundle 'scrooloose/nerdcommenter'    
 "code check
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 "文件查找插件    
 Bundle 'kien/ctrlp.vim'
 "自动添加匹配的右括号 
@@ -87,6 +88,8 @@ Bundle 'davidhalter/jedi-vim'
 Bundle 'ervandew/supertab'
 "buffer
 Bundle 'fholgado/minibufexpl.vim'
+"mark
+Bundle 'kshenoy/vim-signature'
 
 "-----------------  Bundle plugin configuration -----------------------
 " NERDTree settings
@@ -123,14 +126,13 @@ nmap <leader>P :bp<cr>
 nmap <leader>q :MBEbd<cr>
 nmap <leader>qa :bd <C-a><cr>
 nmap :q :qa
-nmap :q! :qa!
 nmap :wq :wqa
 
 "syntastic recommend settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
